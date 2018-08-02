@@ -140,7 +140,7 @@ a[itemprop="url"]:hover {
 
 <meta itemprop="datePublished" content="2018-08-01T19:56:24-05:00" />
 <meta itemprop="dateModified" content="2018-08-01T19:56:24-05:00" />
-<meta itemprop="wordCount" content="467">
+<meta itemprop="wordCount" content="468">
 
 
 
@@ -180,7 +180,7 @@ a[itemprop="url"]:hover {
 
 <p><img src="https://lh3.googleusercontent.com/GilQvBgxmDk_GbRu5lqSvKY3a8yrZ2j482axG8z4bGUWQ8oupywJf-dAq7nK-NPLX0PgGMrBHNc" alt="vim tab rendering example" title="vim tab rendering example" /></p>
 
-<p>In my case I chose a nice vertical bar <code>U+2502</code> from the box drawing set of characters (<a href="https://en.wikipedia.org/wiki/Box_Drawing">https://en.wikipedia.org/wiki/Box_Drawing</a>). In order to activate this feature, the vim <code>list</code> configuration options are added to our <code>.vimrc</code> configuration file.</p>
+<p>In my case I chose a nice vertical bar <code>U+2502</code> from the box drawing set of characters (<a href="https://en.wikipedia.org/wiki/Box_Drawing">https://en.wikipedia.org/wiki/Box_Drawing</a>). In order to activate this feature, the vim <code>list</code> configuration options are added to the <code>.vimrc</code> configuration file.</p>
 
 <pre><code>set list
 set listchars=tab:│\ ,eol:¬,extends:❯,precedes:\&lt;
@@ -190,11 +190,11 @@ set listchars=tab:│\ ,eol:¬,extends:❯,precedes:\&lt;
 
 <h2 id="on-the-fly-re-indentation">On-the-fly re-indentation</h2>
 
-<p>Now tab characters will be rendered in the editor window, but we still have the problem of some source files using spaces for indentation, not tabs. Any Python source file that uses spaces for indentation will look like this:</p>
+<p>Now tab characters will be rendered in the editor window, but there is still a problem. Some source files use spaces for indentation, not tabs. Any Python source file that uses spaces for indentation will look like this:</p>
 
 <p><img src="https://lh3.googleusercontent.com/lCclBPjXsn-yJ6TcB17qzgRY79t6R-ZQrybB7-y3PoUsqqh4q42bdMjZ--GryrQ5JsxgIRuM5Ks" alt="vim Python code with spaces" title="vim Python code with spaces" /></p>
 
-<p>However, Vim autocommands can be used to replace spaces with tabs when reading in a Python source file, and reverse the operation when writing it back to disk. For this, we define two Vim functions and some autocommands in the <code>.vimrc</code> configureation file.</p>
+<p>However, Vim autocommands can be used to replace spaces with tabs when reading in a Python source file, and reverse the operation when writing it back to disk. This can be achieved by defining two Vim functions and some autocommands in the <code>.vimrc</code> configuration file.</p>
 
 <pre><code>function! PyExpandTabs()
         silent setlocal expandtab
@@ -231,7 +231,7 @@ augroup END
   </time>
   
   
-  using <span itemprop="wordCount">467</span> words.
+  using <span itemprop="wordCount">468</span> words.
 </p>
 
       
