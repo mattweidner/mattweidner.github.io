@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>GameOver</title>
-    <link>https://mattweidner.github.io/</link>
-    <description>Recent content on GameOver</description>
+    <title>Posts on GameOver</title>
+    <link>https://mattweidner.github.io/post/</link>
+    <description>Recent content in Posts on GameOver</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Wed, 01 Aug 2018 19:56:24 -0500</lastBuildDate>
     
-	<atom:link href="https://mattweidner.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://mattweidner.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
