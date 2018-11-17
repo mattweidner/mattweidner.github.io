@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parallel Multiprocessing with Python | GameOver</title>
-    <meta name="description" content="Python multiprocessing One of my biggest complaints with Python is the GIL. The Global Interpreter Lock prevents implementation of of running multiple threads of CPU bound tasks. However, using the multiprocessing module, a Python script can side step the GIL by running other, separate instances of the Python interpreter. Each instance, having its own GIL, can run the same function in parallel with different input. The operating system can then, at the process level, distribute the work among multiple processors and processor cores.">
+    <meta name="description" content="Python multiprocessing One of my biggest complaints with Python is the GIL. The Global Interpreter Lock prevents implementation of running multiple threads of CPU bound tasks. However, using the multiprocessing module, a Python script can side step the GIL by running other, separate instances of the Python interpreter. Each instance, having its own GIL, can run the same function in parallel with different input. The operating system can then, at the process level, distribute the work among multiple processors and processor cores.">
     <meta name="keywords" content="">
     
     
@@ -17,7 +17,7 @@
 
 
     <meta property="og:title" content="Parallel Multiprocessing with Python" />
-<meta property="og:description" content="Python multiprocessing One of my biggest complaints with Python is the GIL. The Global Interpreter Lock prevents implementation of of running multiple threads of CPU bound tasks. However, using the multiprocessing module, a Python script can side step the GIL by running other, separate instances of the Python interpreter. Each instance, having its own GIL, can run the same function in parallel with different input. The operating system can then, at the process level, distribute the work among multiple processors and processor cores." />
+<meta property="og:description" content="Python multiprocessing One of my biggest complaints with Python is the GIL. The Global Interpreter Lock prevents implementation of running multiple threads of CPU bound tasks. However, using the multiprocessing module, a Python script can side step the GIL by running other, separate instances of the Python interpreter. Each instance, having its own GIL, can run the same function in parallel with different input. The operating system can then, at the process level, distribute the work among multiple processors and processor cores." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://mattweidner.github.io/post/20181116-multiprocessing_with_python/" />
 
@@ -41,7 +41,7 @@
 <meta name="twitter:image" content="https://source.unsplash.com/collection/983219/2000x1322"/>
 
 <meta name="twitter:title" content="Parallel Multiprocessing with Python"/>
-<meta name="twitter:description" content="Python multiprocessing One of my biggest complaints with Python is the GIL. The Global Interpreter Lock prevents implementation of of running multiple threads of CPU bound tasks. However, using the multiprocessing module, a Python script can side step the GIL by running other, separate instances of the Python interpreter. Each instance, having its own GIL, can run the same function in parallel with different input. The operating system can then, at the process level, distribute the work among multiple processors and processor cores."/>
+<meta name="twitter:description" content="Python multiprocessing One of my biggest complaints with Python is the GIL. The Global Interpreter Lock prevents implementation of running multiple threads of CPU bound tasks. However, using the multiprocessing module, a Python script can side step the GIL by running other, separate instances of the Python interpreter. Each instance, having its own GIL, can run the same function in parallel with different input. The operating system can then, at the process level, distribute the work among multiple processors and processor cores."/>
 
     
 
@@ -135,12 +135,12 @@ a[itemprop="url"]:hover {
   <article itemscope itemtype="http://schema.org/BlogPosting">
     
 <meta itemprop="name" content="Parallel Multiprocessing with Python">
-<meta itemprop="description" content="Python multiprocessing One of my biggest complaints with Python is the GIL. The Global Interpreter Lock prevents implementation of of running multiple threads of CPU bound tasks. However, using the multiprocessing module, a Python script can side step the GIL by running other, separate instances of the Python interpreter. Each instance, having its own GIL, can run the same function in parallel with different input. The operating system can then, at the process level, distribute the work among multiple processors and processor cores.">
+<meta itemprop="description" content="Python multiprocessing One of my biggest complaints with Python is the GIL. The Global Interpreter Lock prevents implementation of running multiple threads of CPU bound tasks. However, using the multiprocessing module, a Python script can side step the GIL by running other, separate instances of the Python interpreter. Each instance, having its own GIL, can run the same function in parallel with different input. The operating system can then, at the process level, distribute the work among multiple processors and processor cores.">
 
 
 <meta itemprop="datePublished" content="2018-11-16T19:42:16-05:00" />
 <meta itemprop="dateModified" content="2018-11-16T19:42:16-05:00" />
-<meta itemprop="wordCount" content="514">
+<meta itemprop="wordCount" content="513">
 
 
 
@@ -172,7 +172,7 @@ a[itemprop="url"]:hover {
 
 <h2 id="python-multiprocessing">Python multiprocessing</h2>
 
-<p>One of my biggest complaints with Python is the GIL. The Global Interpreter Lock prevents implementation of of running multiple threads of CPU bound tasks. However, using the multiprocessing module, a Python script can side step the GIL by running other, separate instances of the Python interpreter. Each instance, having its own GIL, can run the same function in parallel with different input. The operating system can then, at the process level, distribute the work among multiple processors and processor cores. Perhaps the most efficient way of doing this is using the map() function.</p>
+<p>One of my biggest complaints with Python is the GIL. The Global Interpreter Lock prevents implementation of running multiple threads of CPU bound tasks. However, using the multiprocessing module, a Python script can side step the GIL by running other, separate instances of the Python interpreter. Each instance, having its own GIL, can run the same function in parallel with different input. The operating system can then, at the process level, distribute the work among multiple processors and processor cores. Perhaps the most efficient way of doing this is using the map() function.</p>
 
 <h2 id="multiprocessing-module">Multiprocessing module</h2>
 
@@ -197,7 +197,7 @@ if __name__ == &quot;__main__&quot;:
     main()
 </code></pre>
 
-<p>The important bits are the two lines related to the <code>pool</code> variable. <code>pool = multiprocessing.Pool(MAX_PROCESSES)</code> tells the multiprocessing module how many processes should be spawned to process our data. The call to <code>pool.map(process_item, items)</code> is where the magic happens. <code>map()</code> takes each element from the <code>items</code> list and passes it as a parameter to the <code>process_item()</code> function. Here we have a MAX_PROCESSES of 2, so <code>map()</code> takes the first two elements from the <code>items</code> list, spawns a new Python interpreter process, and uses them to run the <code>process_item()</code> function each with one of the two elements. When one of those processes completes, <code>map()</code> takes the next unprocessed element from the <code>items</code> list and repeats the process until all elements have been processed.</p>
+<p>The important bits are the two lines related to the <code>pool</code> variable. <code>pool = multiprocessing.Pool(MAX_PROCESSES)</code> tells the multiprocessing module how many processes should be spawned to process our data. The call to <code>pool.map(process_item, items)</code> is where the magic happens. <code>map()</code> takes each element from the <code>items</code> list and passes it as a parameter to the <code>process_item()</code> function. Here we have a MAX_PROCESSES of 2, so <code>map()</code> takes the first two elements from the <code>items</code> list, spawns two new Python interpreter processes, and uses them to run the <code>process_item()</code> function each with one of the two elements. When one of those processes completes, <code>map()</code> takes the next unprocessed element from the <code>items</code> list and repeats the process until all elements have been processed.</p>
 
 <h2 id="the-task">The task</h2>
 
@@ -258,7 +258,7 @@ if __name__ == &quot;__main__&quot;:
   </time>
   
   
-  using <span itemprop="wordCount">514</span> words.
+  using <span itemprop="wordCount">513</span> words.
 </p>
 
       
