@@ -142,7 +142,7 @@ a[itemprop="url"]:hover {
 
 <meta itemprop="datePublished" content="2018-11-16T19:42:16-05:00" />
 <meta itemprop="dateModified" content="2018-11-16T19:42:16-05:00" />
-<meta itemprop="wordCount" content="513">
+<meta itemprop="wordCount" content="528">
 
 
 
@@ -220,13 +220,18 @@ def process_files(f):
     f.replace(&quot;(&quot;, &quot;\(&quot;)
     f.replace(&quot;)&quot;, &quot;\)&quot;)
     # Convert to OGG
-    cmd = [&quot;ffmpeg&quot;, &quot;-loglevel&quot;, &quot;8&quot;, &quot;-y&quot;, &quot;-i&quot;, &quot;&quot;, &quot;-c:a&quot;, &quot;libvorbis&quot;, &quot;-qscale:a&quot;, &quot;6&quot;, &quot;&quot;]
+    cmd = [&quot;ffmpeg&quot;, &quot;-loglevel&quot;, &quot;8&quot;, &quot;-y&quot;, &quot;-i&quot;, &quot;&quot;, &quot;-c:a&quot;, &quot;libvorbis&quot;,
+	       &quot;-qscale:a&quot;, &quot;6&quot;, &quot;-vn&quot;, &quot;&quot;]
     cmd[5] = &quot;\&quot;&quot;+f+&quot;\&quot;&quot; # input file name
-    cmd[10] = &quot;\&quot;audio/ogg/&quot;+f+&quot;.ogg\&quot;&quot; # output file name
+    cmd[11] = &quot;\&quot;audio/ogg/&quot;+f+&quot;.ogg\&quot;&quot; # output file name
+    print(&quot;[DEBUG]&quot;, &quot; &quot;.join(cmd))
     os.system(&quot; &quot;.join(cmd))
     # Convert to MP3
-    cmd = [&quot;ffmpeg&quot;, &quot;-loglevel&quot;, &quot;8&quot;, &quot;-y&quot;, &quot;-i&quot;, &quot;&quot;, &quot;-c:a&quot;, &quot;libmp3lame&quot;, &quot;-qscale:a&quot;, &quot;3&quot;, &quot;&quot;]
-    cmd[10] = &quot;\&quot;audio/mp3/&quot;+f+&quot;.mp3\&quot;&quot; # output file name
+    cmd = [&quot;ffmpeg&quot;, &quot;-loglevel&quot;, &quot;8&quot;, &quot;-y&quot;, &quot;-i&quot;, &quot;&quot;, &quot;-c:a&quot;, &quot;libmp3lame&quot;,
+	       &quot;-qscale:a&quot;, &quot;3&quot;, &quot;-vn&quot;, &quot;&quot;]
+    cmd[5] = &quot;\&quot;&quot;+f+&quot;\&quot;&quot; # input file name
+    cmd[11] = &quot;\&quot;audio/mp3/&quot;+f+&quot;.mp3\&quot;&quot; # output file name
+    print(&quot;[DEBUG]&quot;, &quot; &quot;.join(cmd))
     os.system(&quot; &quot;.join(cmd))
 
 def main():
@@ -260,7 +265,7 @@ if __name__ == &quot;__main__&quot;:
   </time>
   
   
-  using <span itemprop="wordCount">513</span> words.
+  using <span itemprop="wordCount">528</span> words.
 </p>
 
       
