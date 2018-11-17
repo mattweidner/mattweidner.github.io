@@ -140,7 +140,7 @@ a[itemprop="url"]:hover {
 
 <meta itemprop="datePublished" content="2018-11-16T19:42:16-05:00" />
 <meta itemprop="dateModified" content="2018-11-16T19:42:16-05:00" />
-<meta itemprop="wordCount" content="517">
+<meta itemprop="wordCount" content="514">
 
 
 
@@ -176,73 +176,71 @@ a[itemprop="url"]:hover {
 
 <h2 id="multiprocessing-module">Multiprocessing module</h2>
 
-<p>Let&rsquo;s take a look at an example program:
-import multiprocessing
-import time</p>
+<p>Let&rsquo;s take a look at an example program:</p>
 
-<p>def process_item(item):
-    print(&rdquo;[START]&ldquo;, item)
+<pre><code>import multiprocessing
+import time
+
+def process_item(item):
+    print(&quot;[START]&quot;, item)
     time.sleep(3)
-    print(&rdquo;       &ldquo;, item, &ldquo;[STOP]&ldquo;)</p>
+    print(&quot;       &quot;, item, &quot;[STOP]&quot;)
 
-<p>def main():
+def main():
     MAX_PROCESSES = 2
-    items = [&ldquo;1&rdquo;, &ldquo;2&rdquo;, &ldquo;3&rdquo;, &ldquo;4&rdquo;, &ldquo;5&rdquo;]</p>
+    items = [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;]
 
-<pre><code>pool = multiprocessing.Pool(MAX_PROCESSES)
-pool.map(process_item, items)
+    pool = multiprocessing.Pool(MAX_PROCESSES)
+    pool.map(process_item, items)
+
+if __name__ == &quot;__main__&quot;:
+    main()
 </code></pre>
 
-<p>if <strong>name</strong> == &ldquo;<strong>main</strong>&ldquo;:
-    main()</p>
+<p>The important bits are the two lines related to the <code>pool</code> variable. <code>pool = multiprocessing.Pool(MAX_PROCESSES)</code> tells the multiprocessing module how many processes should be spawned to process our data. The call to <code>pool.map(process_item, items)</code> is where the magic happens. <code>map()</code> takes each element from the <code>items</code> list and passes it as a parameter to the <code>process_item()</code> function. Here we have a MAX_PROCESSES of 2, so <code>map()</code> takes the first two elements from the <code>items</code> list, spawns a new Python interpreter process, and uses them to run the <code>process_item()</code> function each with one of the two elements. When one of those processes completes, <code>map()</code> takes the next unprocessed element from the <code>items</code> list and repeats the process until all elements have been processed.</p>
 
-<pre><code>
-The important bits are the two lines related to the `pool` variable. `pool = multiprocessing.Pool(MAX_PROCESSES)` tells the multiprocessing module how many processes should be spawned to process our data. The call to `pool.map(process_item, items)` is where the magic happens. `map()` takes each element from the `items` list and passes it as a parameter to the `process_item()` function. Here we have a MAX_PROCESSES of 2, so `map()` takes the first two elements from the `items` list, spawns a new Python interpreter process, and uses them to run the `process_item()` function each with one of the two elements. When one of those processes completes, `map()` takes the next unprocessed element from the `items` list and repeats the process until all elements have been processed.
+<h2 id="the-task">The task</h2>
 
+<p>I have a TON of digital audio files. I also like to store these in multiple formats. One lossless format for archiving, one lossy format for playback on smaller devices. So I routinely do batch re-encodings of my audio files to my preferred formats. However, transcoding the files one at a time is slow and my encoder of choice does not take advantage of multiple processor cores. Python and <code>multiprocessing</code> to the rescue!</p>
 
-## The task
-I have a TON of digital audio files. I also like to store these in multiple formats. One lossless format for archiving, one lossy format for playback on smaller devices. So I routinely do batch re-encodings of my audio files to my preferred formats. However, transcoding the files one at a time is slow and my encoder of choice does not take advantage of multiple processor cores. Python and `multiprocessing` to the rescue!
+<h2 id="the-solution">The solution</h2>
 
-## The solution
-</code></pre>
-
-<p>import glob
+<pre><code>import glob
 import os
 import multiprocessing
 import subprocess
-import time</p>
+import time
 
-<p>MAX_PROC = 8</p>
+MAX_PROC = 8
 
-<p>def process_files(f):
-    print(&rdquo;[i] Converting&rdquo;, f)
-    f.replace(&ldquo;(&rdquo;, &ldquo;(&rdquo;)
-    f.replace(&ldquo;)&rdquo;, &ldquo;)&rdquo;)
+def process_files(f):
+    print(&quot;[i] Converting&quot;, f)
+    f.replace(&quot;(&quot;, &quot;\(&quot;)
+    f.replace(&quot;)&quot;, &quot;\)&quot;)
     # Convert to OGG
-    cmd = [&ldquo;ffmpeg&rdquo;, &ldquo;-loglevel&rdquo;, &ldquo;8&rdquo;, &ldquo;-y&rdquo;, &ldquo;-i&rdquo;, &ldquo;&rdquo;, &ldquo;-c:a&rdquo;, &ldquo;libvorbis&rdquo;, &ldquo;-qscale:a&rdquo;, &ldquo;6&rdquo;, &ldquo;&rdquo;]
-    cmd[5] = &ldquo;\&ldquo;&rdquo;+f+&rdquo;\&ldquo;&rdquo; # input file name
-    cmd[10] = &ldquo;\&ldquo;audio/ogg/&rdquo;+f+&ldquo;.ogg\&ldquo;&rdquo; # output file name
-    os.system(&rdquo; &ldquo;.join(cmd))
+    cmd = [&quot;ffmpeg&quot;, &quot;-loglevel&quot;, &quot;8&quot;, &quot;-y&quot;, &quot;-i&quot;, &quot;&quot;, &quot;-c:a&quot;, &quot;libvorbis&quot;, &quot;-qscale:a&quot;, &quot;6&quot;, &quot;&quot;]
+    cmd[5] = &quot;\&quot;&quot;+f+&quot;\&quot;&quot; # input file name
+    cmd[10] = &quot;\&quot;audio/ogg/&quot;+f+&quot;.ogg\&quot;&quot; # output file name
+    os.system(&quot; &quot;.join(cmd))
     # Convert to MP3
-    cmd = [&ldquo;ffmpeg&rdquo;, &ldquo;-loglevel&rdquo;, &ldquo;8&rdquo;, &ldquo;-y&rdquo;, &ldquo;-i&rdquo;, &ldquo;&rdquo;, &ldquo;-c:a&rdquo;, &ldquo;libmp3lame&rdquo;, &ldquo;-qscale:a&rdquo;, &ldquo;3&rdquo;, &ldquo;&rdquo;]
-    cmd[10] = &ldquo;\&ldquo;audio/mp3/&rdquo;+f+&ldquo;.mp3\&ldquo;&rdquo; # output file name
-    os.system(&rdquo; &ldquo;.join(cmd))</p>
+    cmd = [&quot;ffmpeg&quot;, &quot;-loglevel&quot;, &quot;8&quot;, &quot;-y&quot;, &quot;-i&quot;, &quot;&quot;, &quot;-c:a&quot;, &quot;libmp3lame&quot;, &quot;-qscale:a&quot;, &quot;3&quot;, &quot;&quot;]
+    cmd[10] = &quot;\&quot;audio/mp3/&quot;+f+&quot;.mp3\&quot;&quot; # output file name
+    os.system(&quot; &quot;.join(cmd))
 
-<p>def main():
+def main():
     WORK = []
-    EXTENSIONS = [&ldquo;mkv&rdquo;, &ldquo;mp4&rdquo;, &ldquo;webm&rdquo;]
+    EXTENSIONS = [&quot;mkv&quot;, &quot;mp4&quot;, &quot;webm&quot;]
     for ext in EXTENSIONS:
-        for x in glob.glob(&rdquo;*.&ldquo;+ext):
+        for x in glob.glob(&quot;*.&quot;+ext):
             WORK.append(x)
-    print(&ldquo;Converting&rdquo;, len(WORK), &ldquo;files&hellip;&rdquo;)</p>
+    print(&quot;Converting&quot;, len(WORK), &quot;files...&quot;)
 
-<pre><code>p = multiprocessing.Pool(MAX_PROC)
-p.map(process_files, WORK)
-</code></pre>
+    p = multiprocessing.Pool(MAX_PROC)
+    p.map(process_files, WORK)
 
-<p>if <strong>name</strong> == &ldquo;<strong>main</strong>&ldquo;:
+if __name__ == &quot;__main__&quot;:
     main()
-```</p>
+</code></pre>
 
 <p>This program creates a list of files (WORK) with the extensoins specified in EXTENSIONS.It then calls the process_files() function for each element in the WORK list with up to 8 Python interpreter processes running in parallel. The <code>process_files()</code> function uses <code>os.system()</code> to launch ffmpeg once to convert the input file to MP3, and then again to convert to OGG.</p>
 
@@ -260,7 +258,7 @@ p.map(process_files, WORK)
   </time>
   
   
-  using <span itemprop="wordCount">517</span> words.
+  using <span itemprop="wordCount">514</span> words.
 </p>
 
       
