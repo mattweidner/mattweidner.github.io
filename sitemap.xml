@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://mattweidner.github.io/post/20181116-multiprocessing_with_python/</loc>
+    <lastmod>2018-11-16T19:42:16-05:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://mattweidner.github.io/post/20180801-vim_edit_tabs_save_spaces/</loc>
     <lastmod>2018-08-01T19:56:24-05:00</lastmod>
   </url>
@@ -14,13 +19,13 @@
   
   <url>
     <loc>https://mattweidner.github.io/</loc>
-    <lastmod>2018-08-01T19:56:24-05:00</lastmod>
+    <lastmod>2018-11-16T19:42:16-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://mattweidner.github.io/post/</loc>
-    <lastmod>2018-08-01T19:56:24-05:00</lastmod>
+    <lastmod>2018-11-16T19:42:16-05:00</lastmod>
     <priority>0</priority>
   </url>
   

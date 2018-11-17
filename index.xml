@@ -6,10 +6,19 @@
     <description>Recent content on GameOver</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Wed, 01 Aug 2018 19:56:24 -0500</lastBuildDate>
+    <lastBuildDate>Fri, 16 Nov 2018 19:42:16 -0500</lastBuildDate>
     
 	<atom:link href="https://mattweidner.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Parallel Multiprocessing with Python</title>
+      <link>https://mattweidner.github.io/post/20181116-multiprocessing_with_python/</link>
+      <pubDate>Fri, 16 Nov 2018 19:42:16 -0500</pubDate>
+      
+      <guid>https://mattweidner.github.io/post/20181116-multiprocessing_with_python/</guid>
+      <description>Python multiprocessing One of my biggest complaints with Python is the GIL. The Global Interpreter Lock prevents implementation of of running multiple threads of CPU bound tasks. However, using the multiprocessing module, a Python script can side step the GIL by running other, separate instances of the Python interpreter. Each instance, having its own GIL, can run the same function in parallel with different input. The operating system can then, at the process level, distribute the work among multiple processors and processor cores.</description>
+    </item>
     
     <item>
       <title>Python and Spaces and Tabs, Oh My!</title>

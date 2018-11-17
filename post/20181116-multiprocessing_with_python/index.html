@@ -4,28 +4,29 @@
     <meta name="generator" content="Hugo 0.47-DEV" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Posts | GameOver</title>
-    <meta name="description" content="Infosec, programming, and other IT-related ramblings.">
+    <title>Parallel Multiprocessing with Python | GameOver</title>
+    <meta name="description" content="Python multiprocessing One of my biggest complaints with Python is the GIL. The Global Interpreter Lock prevents implementation of of running multiple threads of CPU bound tasks. However, using the multiprocessing module, a Python script can side step the GIL by running other, separate instances of the Python interpreter. Each instance, having its own GIL, can run the same function in parallel with different input. The operating system can then, at the process level, distribute the work among multiple processors and processor cores.">
     <meta name="keywords" content="">
     
     
     
     
-      <meta name="robots" content="noindex">
-    
     
 
-  <meta name="author" content="Matt Weidner">
+  <meta name="author" content="Matt">
 
 
-    <meta property="og:title" content="Posts" />
-<meta property="og:description" content="Infosec, programming, and other IT-related ramblings." />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://mattweidner.github.io/post/" />
+    <meta property="og:title" content="Parallel Multiprocessing with Python" />
+<meta property="og:description" content="Python multiprocessing One of my biggest complaints with Python is the GIL. The Global Interpreter Lock prevents implementation of of running multiple threads of CPU bound tasks. However, using the multiprocessing module, a Python script can side step the GIL by running other, separate instances of the Python interpreter. Each instance, having its own GIL, can run the same function in parallel with different input. The operating system can then, at the process level, distribute the work among multiple processors and processor cores." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://mattweidner.github.io/post/20181116-multiprocessing_with_python/" />
 
 
 
-<meta property="og:updated_time" content="2018-11-16T19:42:16-05:00"/>
+<meta property="article:published_time" content="2018-11-16T19:42:16-05:00"/>
+
+<meta property="article:modified_time" content="2018-11-16T19:42:16-05:00"/>
+
 
 
 
@@ -39,14 +40,14 @@
     <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://source.unsplash.com/collection/983219/2000x1322"/>
 
-<meta name="twitter:title" content="Posts"/>
-<meta name="twitter:description" content="Infosec, programming, and other IT-related ramblings."/>
+<meta name="twitter:title" content="Parallel Multiprocessing with Python"/>
+<meta name="twitter:description" content="Python multiprocessing One of my biggest complaints with Python is the GIL. The Global Interpreter Lock prevents implementation of of running multiple threads of CPU bound tasks. However, using the multiprocessing module, a Python script can side step the GIL by running other, separate instances of the Python interpreter. Each instance, having its own GIL, can run the same function in parallel with different input. The operating system can then, at the process level, distribute the work among multiple processors and processor cores."/>
 
     
 
+
+
   <meta property="og:image" content="https://source.unsplash.com/collection/983219/2000x1322">
-
-
 
 
     
@@ -73,9 +74,7 @@
 
 
     
-      <link href="https://mattweidner.github.io/post/index.xml" rel="alternate" type="application/rss+xml" title="GameOver">
-    
-    <link rel="canonical" href="https://mattweidner.github.io/post/">
+    <link rel="canonical" href="https://mattweidner.github.io/post/20181116-multiprocessing_with_python/">
     
     
     <link rel="icon" sizes="any" href="data:image/svg+xml,%3Csvg%20viewBox='0%200%2046%2045'%20xmlns='http://www.w3.org/2000/svg'%3E%3Ctitle%3EAfter%20Dark%3C/title%3E%3Cpath%20d='M.708%2045L23%20.416%2045.292%2045H.708zM35%2038L23%2019%2011%2038h24z'%20fill='%23000'/%3E%3C/svg%3E">
@@ -133,17 +132,24 @@ a[itemprop="url"]:hover {
 
 </header>
     <main>
-  <header>
-    <h1>Posts</h1>
-  </header>
-  
-    <article itemscope itemtype="http://schema.org/CreativeWork">
-  <header>
-    <h2 itemprop="name">
-      <a href="/post/20181116-multiprocessing_with_python/">Parallel Multiprocessing with Python</a>
-    </h2>
+  <article itemscope itemtype="http://schema.org/BlogPosting">
     
-      <p class="muted"><svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+<meta itemprop="name" content="Parallel Multiprocessing with Python">
+<meta itemprop="description" content="Python multiprocessing One of my biggest complaints with Python is the GIL. The Global Interpreter Lock prevents implementation of of running multiple threads of CPU bound tasks. However, using the multiprocessing module, a Python script can side step the GIL by running other, separate instances of the Python interpreter. Each instance, having its own GIL, can run the same function in parallel with different input. The operating system can then, at the process level, distribute the work among multiple processors and processor cores.">
+
+
+<meta itemprop="datePublished" content="2018-11-16T19:42:16-05:00" />
+<meta itemprop="dateModified" content="2018-11-16T19:42:16-05:00" />
+<meta itemprop="wordCount" content="517">
+
+
+
+<meta itemprop="keywords" content="" />
+
+    <header>
+      <h1 itemprop="headline">Parallel Multiprocessing with Python</h1>
+      <p class="muted">
+        <svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
   <circle cx="16" cy="16" r="14" />
   <path d="M16 8 L16 16 20 20" />
 </svg>
@@ -154,67 +160,117 @@ a[itemprop="url"]:hover {
 
   Published: <time datetime="2018-11-16T19:42:16-05:00">16 Nov, 2018</time>
 
+
+      </p>
+      
+      
+    </header>
+    
+
+    <div itemprop="articleBody">
+      
+
+<h2 id="python-multiprocessing">Python multiprocessing</h2>
+
+<p>One of my biggest complaints with Python is the GIL. The Global Interpreter Lock prevents implementation of of running multiple threads of CPU bound tasks. However, using the multiprocessing module, a Python script can side step the GIL by running other, separate instances of the Python interpreter. Each instance, having its own GIL, can run the same function in parallel with different input. The operating system can then, at the process level, distribute the work among multiple processors and processor cores. Perhaps the most efficient way of doing this is using the map() function.</p>
+
+<h2 id="multiprocessing-module">Multiprocessing module</h2>
+
+<p>Let&rsquo;s take a look at an example program:
+import multiprocessing
+import time</p>
+
+<p>def process_item(item):
+    print(&rdquo;[START]&ldquo;, item)
+    time.sleep(3)
+    print(&rdquo;       &ldquo;, item, &ldquo;[STOP]&ldquo;)</p>
+
+<p>def main():
+    MAX_PROCESSES = 2
+    items = [&ldquo;1&rdquo;, &ldquo;2&rdquo;, &ldquo;3&rdquo;, &ldquo;4&rdquo;, &ldquo;5&rdquo;]</p>
+
+<pre><code>pool = multiprocessing.Pool(MAX_PROCESSES)
+pool.map(process_item, items)
+</code></pre>
+
+<p>if <strong>name</strong> == &ldquo;<strong>main</strong>&ldquo;:
+    main()</p>
+
+<pre><code>
+The important bits are the two lines related to the `pool` variable. `pool = multiprocessing.Pool(MAX_PROCESSES)` tells the multiprocessing module how many processes should be spawned to process our data. The call to `pool.map(process_item, items)` is where the magic happens. `map()` takes each element from the `items` list and passes it as a parameter to the `process_item()` function. Here we have a MAX_PROCESSES of 2, so `map()` takes the first two elements from the `items` list, spawns a new Python interpreter process, and uses them to run the `process_item()` function each with one of the two elements. When one of those processes completes, `map()` takes the next unprocessed element from the `items` list and repeats the process until all elements have been processed.
+
+
+## The task
+I have a TON of digital audio files. I also like to store these in multiple formats. One lossless format for archiving, one lossy format for playback on smaller devices. So I routinely do batch re-encodings of my audio files to my preferred formats. However, transcoding the files one at a time is slow and my encoder of choice does not take advantage of multiple processor cores. Python and `multiprocessing` to the rescue!
+
+## The solution
+</code></pre>
+
+<p>import glob
+import os
+import multiprocessing
+import subprocess
+import time</p>
+
+<p>MAX_PROC = 8</p>
+
+<p>def process_files(f):
+    print(&rdquo;[i] Converting&rdquo;, f)
+    f.replace(&ldquo;(&rdquo;, &ldquo;(&rdquo;)
+    f.replace(&ldquo;)&rdquo;, &ldquo;)&rdquo;)
+    # Convert to OGG
+    cmd = [&ldquo;ffmpeg&rdquo;, &ldquo;-loglevel&rdquo;, &ldquo;8&rdquo;, &ldquo;-y&rdquo;, &ldquo;-i&rdquo;, &ldquo;&rdquo;, &ldquo;-c:a&rdquo;, &ldquo;libvorbis&rdquo;, &ldquo;-qscale:a&rdquo;, &ldquo;6&rdquo;, &ldquo;&rdquo;]
+    cmd[5] = &ldquo;\&ldquo;&rdquo;+f+&rdquo;\&ldquo;&rdquo; # input file name
+    cmd[10] = &ldquo;\&ldquo;audio/ogg/&rdquo;+f+&ldquo;.ogg\&ldquo;&rdquo; # output file name
+    os.system(&rdquo; &ldquo;.join(cmd))
+    # Convert to MP3
+    cmd = [&ldquo;ffmpeg&rdquo;, &ldquo;-loglevel&rdquo;, &ldquo;8&rdquo;, &ldquo;-y&rdquo;, &ldquo;-i&rdquo;, &ldquo;&rdquo;, &ldquo;-c:a&rdquo;, &ldquo;libmp3lame&rdquo;, &ldquo;-qscale:a&rdquo;, &ldquo;3&rdquo;, &ldquo;&rdquo;]
+    cmd[10] = &ldquo;\&ldquo;audio/mp3/&rdquo;+f+&ldquo;.mp3\&ldquo;&rdquo; # output file name
+    os.system(&rdquo; &ldquo;.join(cmd))</p>
+
+<p>def main():
+    WORK = []
+    EXTENSIONS = [&ldquo;mkv&rdquo;, &ldquo;mp4&rdquo;, &ldquo;webm&rdquo;]
+    for ext in EXTENSIONS:
+        for x in glob.glob(&rdquo;*.&ldquo;+ext):
+            WORK.append(x)
+    print(&ldquo;Converting&rdquo;, len(WORK), &ldquo;files&hellip;&rdquo;)</p>
+
+<pre><code>p = multiprocessing.Pool(MAX_PROC)
+p.map(process_files, WORK)
+</code></pre>
+
+<p>if <strong>name</strong> == &ldquo;<strong>main</strong>&ldquo;:
+    main()
+```</p>
+
+<p>This program creates a list of files (WORK) with the extensoins specified in EXTENSIONS.It then calls the process_files() function for each element in the WORK list with up to 8 Python interpreter processes running in parallel. The <code>process_files()</code> function uses <code>os.system()</code> to launch ffmpeg once to convert the input file to MP3, and then again to convert to OGG.</p>
+
+<p>Game Over.</p>
+
+    </div>
+    
+    <footer>
+      <hr>
+      <p>
+  Published
+  
+  <time itemprop="datePublished" datetime="2018-11-16T19:42:16-05:00">
+    16 Nov, 2018
+  </time>
+  
+  
+  using <span itemprop="wordCount">517</span> words.
 </p>
-    
-  </header>
-  
-  <div itemprop="description">
-    Python multiprocessing One of my biggest complaints with Python is the GIL. The Global Interpreter Lock prevents implementation of of running multiple threads of CPU bound tasks. However, using the multiprocessing module, a Python script can side step the GIL by running other, separate instances of the Python interpreter. Each instance, having its own GIL, can run the same function in parallel with different input. The operating system can then, at the process level, distribute the work among multiple processors and processor cores.
-  </div>
-  
-    <nav class="readmore"><a itemprop="url" href="/post/20181116-multiprocessing_with_python/">Read More&nbsp;&raquo;</a></nav>
-  
-  <meta itemprop="inLanguage" content="en-US">
-  <meta itemprop="datePublished" content="2018-11-16T19:42:16-05:00">
-  <meta itemprop="dateModified" content="2018-11-16T19:42:16-05:00">
-  
-</article>
 
-  
-    <article itemscope itemtype="http://schema.org/CreativeWork">
-  <header>
-    <h2 itemprop="name">
-      <a href="/post/20180801-vim_edit_tabs_save_spaces/">Python and Spaces and Tabs, Oh My!</a>
-    </h2>
-    
-      <p class="muted"><svg style="margin-bottom:-3px" class="i-clock" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
-  <circle cx="16" cy="16" r="14" />
-  <path d="M16 8 L16 16 20 20" />
-</svg>
-<span>3 minute read</span>
-<svg style="margin-bottom: -3px" class="i-edit" viewBox="0 0 32 32" width="16" height="16" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
-  <path d="M30 7 L25 2 5 22 3 29 10 27 Z M21 6 L26 11 Z M5 22 L10 27 Z" />
-</svg>
+      
 
-  Published: <time datetime="2018-08-01T19:56:24-05:00">1 Aug, 2018</time>
 
-</p>
-    
-  </header>
-  
-  <div itemprop="description">
-    Python indentation The subject of Python source code indentation can be a contentious one. The Python style guide (PEP8) suggests that using four spaces per indentation level is the proper was to indent Python code. However, I have discovered I prefer to use tabs instead of spaces. Could I customize my text editor of choice, Vim, to edit using tabs and save to disk using spaces? Doing so would allow me to adhere to PEP8 when exchanging source code files with other programmers.
-  </div>
-  
-    <nav class="readmore"><a itemprop="url" href="/post/20180801-vim_edit_tabs_save_spaces/">Read More&nbsp;&raquo;</a></nav>
-  
-  <meta itemprop="inLanguage" content="en-US">
-  <meta itemprop="datePublished" content="2018-08-01T19:56:24-05:00">
-  <meta itemprop="dateModified" content="2018-08-01T19:56:24-05:00">
-  
-</article>
 
-  
+    </footer>
+  </article>
 </main>
     <footer>
-  <nav>
-  
-  
-    <span>Page 1 of 1</span>
-  
-  
-</nav>
-
   
 
 </footer>
